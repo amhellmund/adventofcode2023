@@ -52,9 +52,7 @@ export function isValidGame(game: Game, max_colors: Draw): boolean {
     return true;
 }
 
-export function day02 () {
-    const data = readData("src/data/day02.txt");
-    const games = data.map((line) => readGame(line));
+function evaluatePart1(games: Game[]) {
     const max_colors: Draw = {
         red: 12,
         green: 13,
@@ -62,5 +60,31 @@ export function day02 () {
     }
     const valid_games = games.filter((game) => isValidGame(game, max_colors));
     const game_sum = valid_games.reduce((acc, game) => acc + game.round, 0);
-    console.log(`The sum of game IDs is: ${game_sum}`);
+    console.log(`[Part1] The sum of game IDs is: ${game_sum}`);
+}
+
+function getMaxColor (draws: Draw[]): Draw {
+    return {
+        red: Math.max(...draws.map((draw) => draw.red)),
+        green: Math.max(...draws.map((draw) => draw.green)),
+        blue: Math.max(...draws.map((draw) => draw.blue)),
+    }
+}
+
+function evaluatePart2(games: Game[]) {
+    const cubes_power = games.reduce(
+        (acc, game) => {
+            const max_color = getMaxColor(game.draws);
+            return acc + max_color.red * max_color.green * max_color.blue;
+        }
+        ,0
+    );
+    console.log(`[Part1] The power of cubes is: ${cubes_power}`);
+}
+
+export function day02 () {
+    const data = readData("src/data/day02.txt");
+    const games = data.map((line) => readGame(line));
+    evaluatePart1(games);   
+    evaluatePart2(games);
 }

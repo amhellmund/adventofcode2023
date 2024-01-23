@@ -39,8 +39,7 @@ export function determineCalibrationValue (input: string): number {
 }
 
 
-
-export function day01 () {
+export default function day01 () {
     const data = readData("src/data/day01.txt");
     const calibration_value = data.reduce((acc, line) => acc + determineCalibrationValue(line), 0);
     console.log(`[Part2] The calibration value is: ${calibration_value}`);

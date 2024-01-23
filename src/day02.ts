@@ -82,7 +82,7 @@ function evaluatePart2(games: Game[]) {
     console.log(`[Part1] The power of cubes is: ${cubes_power}`);
 }
 
-export function day02 () {
+export default function day02 () {
     const data = readData("src/data/day02.txt");
     const games = data.map((line) => readGame(line));
     evaluatePart1(games);   
